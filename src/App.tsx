@@ -1,7 +1,10 @@
+import { TaskList } from "./components/TaskList";
 import { tasks } from "./data/tasks";
 
-function App() {
-  return <>{tasks.map((task)=>(<div>{task.title}</div>))}</>;
+export function App() {
+  return (
+    <>
+      <TaskList tasks={tasks} />
+    </>
+  );
 }
-
-export default App;
