@@ -1,5 +1,10 @@
+import type { Task } from "../data/tasks";
 import { TaskItem } from "./TaskItem";
 
-export function TaskList({ tasks }) {
+type TaskListProps = {
+  tasks: Task[];
+};
+
+export function TaskList({ tasks }: TaskListProps) {
   return tasks.map((task) => <TaskItem key={task.id} task={task} />);
 }
