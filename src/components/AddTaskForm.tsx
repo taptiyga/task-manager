@@ -1,6 +1,11 @@
 import { useState } from "react";
+import type { Task } from "../data/tasks";
 
-export function AddTaskForm() {
+type AddTaskFormProps = {
+  addTask: (task: Task) => void;
+};
+
+export function AddTaskForm({ addTask }: AddTaskFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -9,11 +14,13 @@ export function AddTaskForm() {
       onSubmit={(e) => {
         e.preventDefault();
 
-        console.log({
+        const newTask: Task = {
+          id: crypto.randomUUID(),
           title,
           description,
-        });
-
+          status: "new",
+        };
+        addTask(newTask);
         setTitle("");
         setDescription("");
       }}

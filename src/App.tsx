@@ -1,11 +1,16 @@
+import { useState } from "react";
 import { AddTaskForm } from "./components/AddTaskForm";
 import { TaskList } from "./components/TaskList";
-import { tasks } from "./data/tasks";
+import { tasks as initialTasks, type Task } from "./data/tasks";
 
 export function App() {
+  const [tasks, setTasks] = useState(initialTasks);
+  const addTask = (task: Task): void => {
+    setTasks((prevTasks) => [task, ...prevTasks]);
+  };
   return (
     <>
-      <AddTaskForm />
+      <AddTaskForm addTask={addTask} />
       <TaskList tasks={tasks} />
     </>
   );
