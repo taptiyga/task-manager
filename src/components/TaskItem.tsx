@@ -7,8 +7,13 @@ type TaskItemProps = {
 export function TaskItem({ task }: TaskItemProps) {
   return (
     <>
-      <h2>{task.title}</h2>
-      <p>{task.description}</p>
+      <h2>Название: {task.title}</h2>
+      <p>
+        <strong>Описание:</strong> {task.description}
+      </p>
+      <p>
+        <strong>Статус:</strong> {task.status}
+      </p>
     </>
   );
 }
