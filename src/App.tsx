@@ -8,10 +8,13 @@ export function App() {
   const addTask = (task: Task): void => {
     setTasks((prevTasks) => [task, ...prevTasks]);
   };
+  const deleteTask = (id: string): void => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
   return (
     <>
       <AddTaskForm addTask={addTask} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} deleteTask={deleteTask}/>
     </>
   );
 }
