@@ -2,9 +2,10 @@ import type { Task } from "../data/tasks";
 
 type TaskItemProps = {
   task: Task;
+  deleteTask: (id: string) => void;
 };
 
-export function TaskItem({ task }: TaskItemProps) {
+export function TaskItem({ task, deleteTask }: TaskItemProps) {
   return (
     <>
       <h2>Название: {task.title}</h2>
@@ -14,6 +15,7 @@ export function TaskItem({ task }: TaskItemProps) {
       <p>
         <strong>Статус:</strong> {task.status}
       </p>
+      <button onClick={() => deleteTask(task.id)}>Delete</button>
     </>
   );
 }
