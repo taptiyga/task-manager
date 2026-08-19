@@ -5,9 +5,15 @@ type TaskItemProps = {
   task: Task;
   deleteTask: (id: string) => void;
   updateTask: (id: string, title: string, description: string) => void;
+  updateTaskStatus: (id: string, status: Task["status"]) => void;
 };
 
-export function TaskItem({ task, deleteTask, updateTask }: TaskItemProps) {
+export function TaskItem({
+  task,
+  deleteTask,
+  updateTask,
+  updateTaskStatus,
+}: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
@@ -38,10 +44,20 @@ export function TaskItem({ task, deleteTask, updateTask }: TaskItemProps) {
           <p>
             <strong>Описание:</strong> {task.description}
           </p>
-
           <p>
             <strong>Статус:</strong> {task.status}
           </p>
+
+          <select
+            value={task.status}
+            onChange={(e) =>
+              updateTaskStatus(task.id, e.target.value as Task["status"])
+            }
+          >
+            <option value="new">New</option>
+            <option value="in-progress">In progress</option>
+            <option value="done">Done</option>
+          </select>
 
           <button onClick={() => setIsEditing(true)}>Edit</button>
 
