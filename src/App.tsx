@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AddTaskForm } from "./components/AddTaskForm";
-import { TaskList } from "./components/TaskList";
+import { AddTaskForm } from "./components/AddTaskForm/AddTaskForm";
+import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
 
 export function App() {

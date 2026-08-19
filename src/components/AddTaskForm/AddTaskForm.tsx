@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Task } from "../data/tasks";
+import type { Task } from "../../data/tasks";
 
 type AddTaskFormProps = {
   addTask: (task: Task) => void;

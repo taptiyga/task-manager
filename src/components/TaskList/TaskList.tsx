@@ -1,5 +1,6 @@
-import type { Task } from "../data/tasks";
-import { TaskItem } from "./TaskItem";
+import type { Task } from "../../data/tasks";
+import { TaskItem } from "../TaskItem/TaskItem";
+
 
 type TaskListProps = {
   tasks: Task[];
