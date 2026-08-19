@@ -1,0 +1,12 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+  margin: 24px auto 0;
+}
+@media (max-width: 600px) {
+  .list {
+    max-width: none;
+  }
+}

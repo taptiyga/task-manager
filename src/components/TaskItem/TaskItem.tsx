@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Task } from "../../data/tasks";
-
+import styles from "./TaskItem.module.css";
 
 type TaskItemProps = {
   task: Task;
@@ -19,37 +19,42 @@ export function TaskItem({
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   return (
-    <>
+    <div className={styles.card}>
       {isEditing ? (
-        <>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} />
-
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-
-          <button
-            onClick={() => {
-              updateTask(task.id, title, description);
-              setIsEditing(false);
-            }}
-          >
-            Save
-          </button>
-        </>
+          <div className={styles.editForm}>
+            <input
+              className={styles.input}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <textarea
+              className={styles.textarea}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <button
+              className={styles.button}
+              onClick={() => {
+                updateTask(task.id, title, description);
+                setIsEditing(false);
+              }}
+            >
+              Save
+            </button>
+          </div>
       ) : (
         <>
-          <h2>Название: {task.title}</h2>
+          <h2 className={styles.title}>Название: {task.title}</h2>
 
-          <p>
+          <p className={styles.description}>
             <strong>Описание:</strong> {task.description}
           </p>
-          <p>
+          <div className={styles.status}>
             <strong>Статус:</strong> {task.status}
-          </p>
+          </div>
 
           <select
+            className={styles.select}
             value={task.status}
             onChange={(e) =>
               updateTaskStatus(task.id, e.target.value as Task["status"])
@@ -59,12 +64,22 @@ export function TaskItem({
             <option value="in-progress">In progress</option>
             <option value="done">Done</option>
           </select>
-
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-
-          <button onClick={() => deleteTask(task.id)}>Delete</button>
+          <div className={styles.actions}>
+            <button
+              className={styles.button}
+              onClick={() => setIsEditing(true)}
+            >
+              Edit
+            </button>
+            <button
+              className={styles.button}
+              onClick={() => deleteTask(task.id)}
+            >
+              Delete
+            </button>
+          </div>
         </>
       )}
-    </>
+    </div>
   );
 }
