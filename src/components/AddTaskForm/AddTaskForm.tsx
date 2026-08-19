@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { Task } from "../data/tasks";
+import type { Task } from "../../data/tasks";
+import styles from "./AddTaskForm.module.css";
 
 type AddTaskFormProps = {
   addTask: (task: Task) => void;
@@ -11,6 +12,7 @@ export function AddTaskForm({ addTask }: AddTaskFormProps) {
 
   return (
     <form
+      className={styles.form}
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -25,14 +27,21 @@ export function AddTaskForm({ addTask }: AddTaskFormProps) {
         setDescription("");
       }}
     >
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
+      <input
+        className={styles.input}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
       <textarea
+        className={styles.textarea}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <button type="submit">Add task</button>
+      <button className={styles.button} type="submit">
+        Add task
+      </button>
     </form>
   );
 }

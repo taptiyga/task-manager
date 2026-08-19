@@ -1,0 +1,69 @@
+.card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.title {
+  margin: 0 0 10px;
+}
+
+.description {
+  margin: 0 0 10px;
+}
+
+.status {
+  margin-bottom: 15px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input,
+.textarea {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+  margin-bottom: 15px;
+}
+@media (max-width: 600px) {
+  .card {
+    padding: 16px;
+  }
+
+  .actions {
+    flex-wrap: wrap;
+  }
+
+  .button {
+    flex: 1;
+  }
+}

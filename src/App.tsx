@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { AddTaskForm } from "./components/AddTaskForm";
-import { TaskList } from "./components/TaskList";
+import { AddTaskForm } from "./components/AddTaskForm/AddTaskForm";
+import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
+import styles from "./App.module.css";
 
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
@@ -24,7 +25,7 @@ export function App() {
     );
   };
   return (
-    <>
+    <main className={styles.app}>
       <AddTaskForm addTask={addTask} />
       <TaskList
         tasks={tasks}
@@ -32,6 +33,6 @@ export function App() {
         updateTask={updateTask}
         updateTaskStatus={updateTaskStatus}
       />
-    </>
+    </main>
   );
 }
