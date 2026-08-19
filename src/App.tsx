@@ -18,10 +18,20 @@ export function App() {
       ),
     );
   };
+  const updateTaskStatus = (id: string, status: Task["status"]): void => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === id ? { ...task, status } : task)),
+    );
+  };
   return (
     <>
       <AddTaskForm addTask={addTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} updateTask={updateTask}/>
+      <TaskList
+        tasks={tasks}
+        deleteTask={deleteTask}
+        updateTask={updateTask}
+        updateTaskStatus={updateTaskStatus}
+      />
     </>
   );
 }
