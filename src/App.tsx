@@ -11,10 +11,17 @@ export function App() {
   const deleteTask = (id: string): void => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
+  const updateTask = (id: string, title: string, description: string): void => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, title, description } : task,
+      ),
+    );
+  };
   return (
     <>
       <AddTaskForm addTask={addTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask}/>
+      <TaskList tasks={tasks} deleteTask={deleteTask} updateTask={updateTask}/>
     </>
   );
 }
