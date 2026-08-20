@@ -4,10 +4,14 @@ import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
 import styles from "./App.module.css";
 import { SearchBar } from "./components/SearchBar/SearchBar";
+import { TaskFilter } from "./components/TaskFilter/TaskFilter";
 
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | Task["status"]>(
+    "all",
+  );
   const addTask = (task: Task): void => {
     setTasks((prevTasks) => [task, ...prevTasks]);
   };
@@ -26,14 +30,26 @@ export function App() {
       prevTasks.map((task) => (task.id === id ? { ...task, status } : task)),
     );
   };
-  const filteredTasks = tasks.filter((task) =>
-    task.title.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch = task.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesStatus =
+      statusFilter === "all" || task.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
   return (
     <main className={styles.app}>
       <AddTaskForm addTask={addTask} />
 
       <SearchBar search={search} setSearch={setSearch} />
+
+      <TaskFilter
+        statusFilter={statusFilter}
+        setStatusFilter={setStatusFilter}
+      />
 
       <TaskList
         tasks={filteredTasks}
