@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Task } from "../../data/tasks";
 import styles from "./TaskItem.module.css";
+import { statusLabels } from "../../utils/statusLabels";
 
 type TaskItemProps = {
   task: Task;
@@ -21,27 +22,27 @@ export function TaskItem({
   return (
     <div className={styles.card}>
       {isEditing ? (
-          <div className={styles.editForm}>
-            <input
-              className={styles.input}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              className={styles.textarea}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <button
-              className={styles.button}
-              onClick={() => {
-                updateTask(task.id, title, description);
-                setIsEditing(false);
-              }}
-            >
-              Save
-            </button>
-          </div>
+        <div className={styles.editForm}>
+          <input
+            className={styles.input}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <textarea
+            className={styles.textarea}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button
+            className={styles.button}
+            onClick={() => {
+              updateTask(task.id, title, description);
+              setIsEditing(false);
+            }}
+          >
+            Сохранить
+          </button>
+        </div>
       ) : (
         <>
           <h2 className={styles.title}>Название: {task.title}</h2>
@@ -50,7 +51,7 @@ export function TaskItem({
             <strong>Описание:</strong> {task.description}
           </p>
           <div className={styles.status}>
-            <strong>Статус:</strong> {task.status}
+            <strong>Статус:</strong> {statusLabels[task.status]}
           </div>
 
           <select
@@ -60,22 +61,22 @@ export function TaskItem({
               updateTaskStatus(task.id, e.target.value as Task["status"])
             }
           >
-            <option value="new">New</option>
-            <option value="in-progress">In progress</option>
-            <option value="done">Done</option>
+            <option value="new">Новая</option>
+            <option value="in-progress">В процессе</option>
+            <option value="done">Выполнена</option>
           </select>
           <div className={styles.actions}>
             <button
               className={styles.button}
               onClick={() => setIsEditing(true)}
             >
-              Edit
+              Редактировать
             </button>
             <button
               className={styles.button}
               onClick={() => deleteTask(task.id)}
             >
-              Delete
+              Удалить
             </button>
           </div>
         </>

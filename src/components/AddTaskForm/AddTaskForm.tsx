@@ -24,7 +24,7 @@ export function AddTaskForm({ addTask }: AddTaskFormProps) {
         const newTask: Task = {
           id: crypto.randomUUID(),
           title: title.trim(),
-          description,
+          description: description.trim(),
           status: "new",
         };
         addTask(newTask);
@@ -35,18 +35,20 @@ export function AddTaskForm({ addTask }: AddTaskFormProps) {
     >
       <input
         className={styles.input}
+        placeholder="Название задачи"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
 
       <textarea
         className={styles.textarea}
+        placeholder="Описание задачи"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       {error && <p className={styles.error}>{error}</p>}
       <button className={styles.button} type="submit">
-        Add task
+        Добавить задачу
       </button>
     </form>
   );
