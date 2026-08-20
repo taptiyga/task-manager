@@ -5,6 +5,7 @@ import { tasks as initialTasks, type Task } from "./data/tasks";
 import styles from "./App.module.css";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { TaskFilter } from "./components/TaskFilter/TaskFilter";
+import { TaskSort } from "./components/TaskSort/TaskSort";
 
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
@@ -12,6 +13,9 @@ export function App() {
   const [statusFilter, setStatusFilter] = useState<"all" | Task["status"]>(
     "all",
   );
+  const [sortOrder, setSortOrder] = useState<
+    "default" | "title-asc" | "title-desc"
+  >("default");
   const addTask = (task: Task): void => {
     setTasks((prevTasks) => [task, ...prevTasks]);
   };
@@ -40,6 +44,15 @@ export function App() {
 
     return matchesSearch && matchesStatus;
   });
+  const sortedTasks = [...filteredTasks];
+  
+  if (sortOrder === "title-asc") {
+    sortedTasks.sort((a, b) => a.title.localeCompare(b.title));
+  }
+  
+  if (sortOrder === "title-desc") {
+    sortedTasks.sort((a, b) => b.title.localeCompare(a.title));
+  }
   return (
     <main className={styles.app}>
       <AddTaskForm addTask={addTask} />
@@ -51,8 +64,10 @@ export function App() {
         setStatusFilter={setStatusFilter}
       />
 
+      <TaskSort sortOrder={sortOrder} setSortOrder={setSortOrder} />
+
       <TaskList
-        tasks={filteredTasks}
+        tasks={sortedTasks}
         deleteTask={deleteTask}
         updateTask={updateTask}
         updateTaskStatus={updateTaskStatus}
