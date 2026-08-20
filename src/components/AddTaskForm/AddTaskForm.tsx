@@ -9,20 +9,26 @@ type AddTaskFormProps = {
 export function AddTaskForm({ addTask }: AddTaskFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
 
   return (
     <form
       className={styles.form}
       onSubmit={(e) => {
         e.preventDefault();
+        if (!title.trim()) {
+          setError("Название задачи обязательно");
+          return;
+        }
 
         const newTask: Task = {
           id: crypto.randomUUID(),
-          title,
+          title: title.trim(),
           description,
           status: "new",
         };
         addTask(newTask);
+        setError("");
         setTitle("");
         setDescription("");
       }}
@@ -38,7 +44,7 @@ export function AddTaskForm({ addTask }: AddTaskFormProps) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-
+      {error && <p className={styles.error}>{error}</p>}
       <button className={styles.button} type="submit">
         Add task
       </button>
