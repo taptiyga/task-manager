@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddTaskForm } from "./components/AddTaskForm/AddTaskForm";
 import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
@@ -8,7 +8,15 @@ import { TaskFilter } from "./components/TaskFilter/TaskFilter";
 import { TaskSort } from "./components/TaskSort/TaskSort";
 
 export function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const savedTasks = localStorage.getItem("tasks");
+
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+
+    return initialTasks;
+  });
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | Task["status"]>(
     "all",
@@ -34,6 +42,9 @@ export function App() {
       prevTasks.map((task) => (task.id === id ? { ...task, status } : task)),
     );
   };
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
   const filteredTasks = tasks.filter((task) => {
     const matchesSearch = task.title
       .toLowerCase()
