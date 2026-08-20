@@ -15,8 +15,8 @@ export function TaskList({
   updateTask,
   updateTaskStatus,
 }: TaskListProps) {
-  if(tasks.length===0){
-    return <p className={styles.empty}>Задачи не найдены</p>
+  if (tasks.length === 0) {
+    return <p className={styles.empty}>Задачи не найдены</p>;
   }
   return (
     <div className={styles.list}>
