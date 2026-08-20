@@ -3,9 +3,11 @@ import { AddTaskForm } from "./components/AddTaskForm/AddTaskForm";
 import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
 import styles from "./App.module.css";
+import { SearchBar } from "./components/SearchBar/SearchBar";
 
 export function App() {
   const [tasks, setTasks] = useState(initialTasks);
+  const [search, setSearch] = useState("");
   const addTask = (task: Task): void => {
     setTasks((prevTasks) => [task, ...prevTasks]);
   };
@@ -24,11 +26,17 @@ export function App() {
       prevTasks.map((task) => (task.id === id ? { ...task, status } : task)),
     );
   };
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(search.toLowerCase()),
+  );
   return (
     <main className={styles.app}>
       <AddTaskForm addTask={addTask} />
+
+      <SearchBar search={search} setSearch={setSearch} />
+
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         deleteTask={deleteTask}
         updateTask={updateTask}
         updateTaskStatus={updateTaskStatus}
