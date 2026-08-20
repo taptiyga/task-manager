@@ -10,3 +10,11 @@
     max-width: none;
   }
 }
+.empty {
+  margin: 24px auto 0;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
