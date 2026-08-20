@@ -6,6 +6,7 @@ import styles from "./App.module.css";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { TaskFilter } from "./components/TaskFilter/TaskFilter";
 import { TaskSort } from "./components/TaskSort/TaskSort";
+import { TaskCounter } from "./components/TaskCounter/TaskCounter";
 
 export function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
@@ -26,6 +27,9 @@ export function App() {
   >("default");
   const addTask = (task: Task): void => {
     setTasks((prevTasks) => [task, ...prevTasks]);
+    setSearch("");
+    setStatusFilter("all");
+    setSortOrder("default");
   };
   const deleteTask = (id: string): void => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
@@ -76,6 +80,8 @@ export function App() {
       />
 
       <TaskSort sortOrder={sortOrder} setSortOrder={setSortOrder} />
+
+      <TaskCounter tasks={tasks}/>
 
       <TaskList
         tasks={sortedTasks}

@@ -1,0 +1,16 @@
+.counter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 500px;
+  margin: 24px auto 0;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  flex-wrap: wrap;
+}
+
+.item {
+  font-size: 14px;
+}
