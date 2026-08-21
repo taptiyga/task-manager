@@ -74,7 +74,13 @@
 .cancelButton {
   border: 1px solid #ccc;
 }
-
+.error {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: red;
+}
 @media (max-width: 600px) {
   .card {
     padding: 16px;
