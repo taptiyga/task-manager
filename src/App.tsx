@@ -4,11 +4,8 @@ import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
 import styles from "./App.module.css";
 import { Header } from "./components/Header/Header";
-import { SearchBar } from "./components/SearchBar/SearchBar";
-import { TaskFilter } from "./components/TaskFilter/TaskFilter";
-import { TaskSort } from "./components/TaskSort/TaskSort";
 import { TaskCounter } from "./components/TaskCounter/TaskCounter";
-import { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
+import { TaskControls } from "./components/TaskControls/TaskControls";
 
 export function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
@@ -84,14 +81,14 @@ export function App() {
       <Header theme={theme} setTheme={setTheme} />
       <AddTaskForm addTask={addTask} />
 
-      <SearchBar search={search} setSearch={setSearch} />
-
-      <TaskFilter
+      <TaskControls
+        search={search}
+        setSearch={setSearch}
         statusFilter={statusFilter}
         setStatusFilter={setStatusFilter}
+        sortOrder={sortOrder}
+        setSortOrder={setSortOrder}
       />
-
-      <TaskSort sortOrder={sortOrder} setSortOrder={setSortOrder} />
 
       <TaskCounter tasks={tasks} />
 
