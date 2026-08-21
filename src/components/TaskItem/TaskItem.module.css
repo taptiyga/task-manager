@@ -54,6 +54,27 @@
   font: inherit;
   margin-bottom: 15px;
 }
+.confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+.deleteButton,
+.cancelButton {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+.deleteButton {
+  border: none;
+}
+
+.cancelButton {
+  border: 1px solid #ccc;
+}
+
 @media (max-width: 600px) {
   .card {
     padding: 16px;

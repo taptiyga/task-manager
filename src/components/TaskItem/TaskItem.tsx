@@ -17,6 +17,7 @@ export function TaskItem({
   updateTaskStatus,
 }: TaskItemProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
   return (
@@ -65,20 +66,50 @@ export function TaskItem({
             <option value="in-progress">В процессе</option>
             <option value="done">Выполнена</option>
           </select>
-          <div className={styles.actions}>
-            <button
-              className={styles.button}
-              onClick={() => setIsEditing(true)}
-            >
-              Редактировать
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => deleteTask(task.id)}
-            >
-              Удалить
-            </button>
-          </div>
+
+          {!isConfirming ? (
+            <>
+              <div className={styles.actions}>
+                <button
+                  className={styles.button}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Редактировать
+                </button>
+
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setIsEditing(false);
+                    setIsConfirming(true);
+                  }}
+                >
+                  Удалить
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className={styles.confirm}>
+              <p>Удалить эту задачу?</p>
+
+              <button
+                className={styles.deleteButton}
+                onClick={() => {
+                  deleteTask(task.id);
+                  setIsConfirming(false);
+                }}
+              >
+                Удалить
+              </button>
+
+              <button
+                className={styles.cancelButton}
+                onClick={() => setIsConfirming(false)}
+              >
+                Отмена
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
