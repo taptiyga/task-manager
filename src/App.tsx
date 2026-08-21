@@ -7,6 +7,7 @@ import { Header } from "./components/Header/Header";
 import { TaskCounter } from "./components/TaskCounter/TaskCounter";
 import { TaskControls } from "./components/TaskControls/TaskControls";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { ClearTasks } from "./components/ClearTasks/ClearTasks";
 export function App() {
   const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
   useEffect(() => {
@@ -28,6 +29,12 @@ export function App() {
   };
   const deleteTask = (id: string): void => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+  const clearAllTasks = (): void => {
+    setTasks([]);
+    setSearch("");
+    setStatusFilter("all");
+    setSortOrder("default");
   };
   const updateTask = (id: string, title: string, description: string): void => {
     setTasks((prevTasks) =>
@@ -75,7 +82,7 @@ export function App() {
       />
 
       <TaskCounter tasks={tasks} />
-
+      <ClearTasks clearAllTasks={clearAllTasks} />
       <TaskList
         tasks={sortedTasks}
         deleteTask={deleteTask}
