@@ -1,7 +1,12 @@
 .card {
   padding: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 10px;
+  background: var(--card);
+  color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .title {
@@ -27,6 +32,8 @@
   border-radius: 6px;
   font: inherit;
   cursor: pointer;
+  background: var(--button-background);
+  color: var(--text);
 }
 
 .editForm {
@@ -36,30 +43,32 @@
 }
 
 .input,
-.textarea {
+.textarea,
+.select {
   padding: 8px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font: inherit;
+  background: var(--input-background);
+  color: var(--text);
 }
 
 .textarea {
   min-height: 80px;
   resize: vertical;
 }
+
 .select {
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font: inherit;
   margin-bottom: 15px;
 }
+
 .confirm {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 15px;
 }
+
 .deleteButton,
 .cancelButton {
   padding: 8px 12px;
@@ -67,13 +76,19 @@
   font: inherit;
   cursor: pointer;
 }
+
 .deleteButton {
   border: none;
+  background: var(--button-background);
+  color: var(--text);
 }
 
 .cancelButton {
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
 }
+
 .error {
   margin: 0;
   padding: 8px 10px;
@@ -81,6 +96,7 @@
   font-size: 14px;
   color: red;
 }
+
 @media (max-width: 600px) {
   .card {
     padding: 16px;

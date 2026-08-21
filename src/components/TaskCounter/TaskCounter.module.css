@@ -5,10 +5,14 @@
   max-width: 500px;
   margin: 24px auto 0;
   padding: 16px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fff;
+  background: var(--card);
+  color: var(--text);
   flex-wrap: wrap;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .item {

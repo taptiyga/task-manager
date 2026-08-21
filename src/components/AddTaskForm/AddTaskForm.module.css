@@ -5,31 +5,47 @@
   max-width: 500px;
   margin: 0 auto;
 }
+
 .input,
 .textarea {
   padding: 10px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font: inherit;
+  background: var(--input-background);
+  color: var(--text);
 }
 
 .textarea {
   min-height: 100px;
   resize: vertical;
 }
+
 .button {
   padding: 10px 16px;
   border: none;
   border-radius: 6px;
   font: inherit;
   cursor: pointer;
+  background: var(--button-background);
+  color: var(--text);
+}
+
+.error {
+ color: var(--error);
+  font-size: 14px;
+  margin: 0;
+}
+.input::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+.textarea::placeholder {
+  color: var(--text);
+  opacity: 0.6;
 }
 @media (max-width: 600px) {
   .form {
     max-width: none;
   }
-}
-.error {
-  color: red;
-  font-size: 14px;
 }
