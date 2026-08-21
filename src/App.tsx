@@ -6,30 +6,17 @@ import styles from "./App.module.css";
 import { Header } from "./components/Header/Header";
 import { TaskCounter } from "./components/TaskCounter/TaskCounter";
 import { TaskControls } from "./components/TaskControls/TaskControls";
-
+import { useLocalStorage } from "./hooks/useLocalStorage";
 export function App() {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const savedTasks = localStorage.getItem("tasks");
-
-    if (savedTasks) {
-      return JSON.parse(savedTasks);
-    }
-
-    return initialTasks;
-  });
+  const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+  const [tasks, setTasks] = useLocalStorage<Task[]>("tasks", initialTasks);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<"all" | Task["status"]>(
     "all",
   );
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    const savedTheme = localStorage.getItem("theme");
-
-    return savedTheme === "dark" ? "dark" : "light";
-  });
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
   const [sortOrder, setSortOrder] = useState<
     "default" | "title-asc" | "title-desc"
   >("default");
@@ -54,9 +41,6 @@ export function App() {
       prevTasks.map((task) => (task.id === id ? { ...task, status } : task)),
     );
   };
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
   const filteredTasks = tasks.filter((task) => {
     const matchesSearch = task.title
       .toLowerCase()
