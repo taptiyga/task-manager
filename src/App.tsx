@@ -3,10 +3,12 @@ import { AddTaskForm } from "./components/AddTaskForm/AddTaskForm";
 import { TaskList } from "./components/TaskList/TaskList";
 import { tasks as initialTasks, type Task } from "./data/tasks";
 import styles from "./App.module.css";
+import { Header } from "./components/Header/Header";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 import { TaskFilter } from "./components/TaskFilter/TaskFilter";
 import { TaskSort } from "./components/TaskSort/TaskSort";
 import { TaskCounter } from "./components/TaskCounter/TaskCounter";
+import { ThemeSwitcher } from "./components/ThemeSwitcher/ThemeSwitcher";
 
 export function App() {
   const [tasks, setTasks] = useState<Task[]>(() => {
@@ -22,6 +24,15 @@ export function App() {
   const [statusFilter, setStatusFilter] = useState<"all" | Task["status"]>(
     "all",
   );
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const savedTheme = localStorage.getItem("theme");
+
+    return savedTheme === "dark" ? "dark" : "light";
+  });
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
   const [sortOrder, setSortOrder] = useState<
     "default" | "title-asc" | "title-desc"
   >("default");
@@ -60,16 +71,17 @@ export function App() {
     return matchesSearch && matchesStatus;
   });
   const sortedTasks = [...filteredTasks];
-  
+
   if (sortOrder === "title-asc") {
     sortedTasks.sort((a, b) => a.title.localeCompare(b.title));
   }
-  
+
   if (sortOrder === "title-desc") {
     sortedTasks.sort((a, b) => b.title.localeCompare(a.title));
   }
   return (
     <main className={styles.app}>
+      <Header theme={theme} setTheme={setTheme} />
       <AddTaskForm addTask={addTask} />
 
       <SearchBar search={search} setSearch={setSearch} />
@@ -81,7 +93,7 @@ export function App() {
 
       <TaskSort sortOrder={sortOrder} setSortOrder={setSortOrder} />
 
-      <TaskCounter tasks={tasks}/>
+      <TaskCounter tasks={tasks} />
 
       <TaskList
         tasks={sortedTasks}

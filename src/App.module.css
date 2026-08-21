@@ -1,6 +1,8 @@
 .app {
   min-height: 100vh;
   padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 @media (max-width: 600px) {
