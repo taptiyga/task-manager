@@ -1,77 +1,154 @@
-# React + TypeScript + Vite
+# Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-приложение для создания и управления задачами.
 
-Currently, two official plugins are available:
+## Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Создание новых задач
+* Редактирование задач
+* Удаление задач с подтверждением
+* Удаление всех задач с подтверждением
+* Изменение статуса задачи
+* Поиск задач по названию
+* Фильтрация по статусу
+* Сортировка по названию
+* Счётчик задач
+* Сохранение задач в `localStorage`
+* Сохранение выбранной темы
+* Светлая и тёмная тема
+* Адаптивная вёрстка для мобильных устройств
+* Валидация названия задачи
+* Обработка ошибок `localStorage`
 
-## React Compiler
+## Статусы задач
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Задача может иметь один из трёх статусов:
 
-Note: This will impact Vite dev & build performances.
+* **Новая**
+* **В процессе**
+* **Выполнена**
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* React 19
+* TypeScript
+* Vite
+* CSS Modules
+* React Compiler
+* localStorage
+* Git / GitHub
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Структура проекта
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+src/
+├── components/
+│   ├── AddTaskForm/
+│   ├── ClearTasks/
+│   ├── Header/
+│   ├── SearchBar/
+│   ├── TaskCounter/
+│   ├── TaskFilter/
+│   ├── TaskItem/
+│   ├── TaskList/
+│   ├── TaskSort/
+│   └── ThemeSwitcher/
+│
+├── data/
+│   └── tasks.ts
+│
+├── hooks/
+│   └── useLocalStorage.ts
+│
+├── utils/
+│   └── statusLabels.ts
+│
+├── App.tsx
+├── App.module.css
+├── index.css
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Запуск проекта
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Клонировать репозиторий:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-Task List component in progress.
+```bash
+git clone <URL_РЕПОЗИТОРИЯ>
 ```
+
+Перейти в папку проекта:
+
+```bash
+cd task-manager
+```
+
+Установить зависимости:
+
+```bash
+npm install
+```
+
+Запустить приложение в режиме разработки:
+
+```bash
+npm run dev
+```
+
+После запуска открыть адрес, который покажет Vite в терминале.
+
+## Проверка проекта
+
+Проверка TypeScript и production-сборки:
+
+```bash
+npm run build
+```
+
+Проверка ESLint:
+
+```bash
+npm run lint
+```
+
+Предварительный просмотр production-сборки:
+
+```bash
+npm run preview
+```
+
+## Хранение данных
+
+Задачи и выбранная тема сохраняются в браузере пользователя с помощью `localStorage`.
+
+Поэтому после перезагрузки страницы созданные задачи и выбранная тема сохраняются.
+
+## Публикация
+
+Проект подготовлен для публикации через GitHub Pages.
+
+Для публикации используется:
+
+```bash
+npm run deploy
+```
+
+Production-сборка создаётся в папке:
+
+```text
+dist/
+```
+
+## Git
+
+Основная ветка проекта:
+
+```text
+main
+```
+
+Разработка новых функций выполняется в отдельных feature-ветках и после проверки объединяется с `main` через Pull Request.
+
+## Автор
+
+Task Manager — учебный проект на React + TypeScript.
